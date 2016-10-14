@@ -1,0 +1,96 @@
+#include <iostream>
+
+
+#include "console.cpp"
+#include "shape.h"
+#include <windows.h>
+#include <time.h>
+
+using namespace std;
+
+bool rotate(Shape &board,Shape &s){
+    Shape tmp=s;
+    tmp.rotate();
+    if(tmp.crashShape(board)|| s.getX()<=0) return false;
+    s.rotate();
+    return true;
+}
+
+bool move(Shape &board,Shape &s,int dx,int dy){
+    Shape tmp=s;
+    tmp.move(dx,dy);
+    if(tmp.crashShape(board)|| tmp.getX()<0 || tmp.getX()+tmp.getWidth()>board.getWidth()
+        || tmp.getHeight()+tmp.getY()>board.getHeight()) return false;
+    s.move(dx,dy);
+}
+
+bool eat(Shape &board,Shape &s){
+    Shape tmp=s;
+    tmp.move(0,1);
+    if(tmp.crashShape(board)|| tmp.getHeight()+tmp.getY()>board.getHeight()){
+        for(int i=0;i<s.getHeight();i++){
+            for(int j=0;j<s.getWidth();j++){
+                int ty=i+s.getY();
+                int tx=j+s.getX();
+                board.set(ty,tx,s.get(i,j));
+            }
+        }
+        return true;
+    }
+    return false;
+
+}
+
+int main()
+{
+    Console con("xep hinh");
+
+    con.setCursor(false);
+    con.setBackground(con.WHITE);
+    Shape board(20,10,Shape::NONE);
+
+    Shape L(3,2,con.LIGHT_RED);
+    L.set(0,1,-1);
+    L.set(1,1,-1);
+    Shape T(2,3,con.BLUE);
+    T.set(1,0,-1);
+    T.set(1,2,-1);
+    Shape I(1,4,con.LIGHT_YELLOW);
+    Shape O(2,2,con.AQUA);
+    Shape Z(3,2,con.GREEN);
+    Z.set(0,0,-1);
+    Z.set(2,1,-1);
+
+    Shape S(3,2,con.LIGHT_PURPLE);
+    S.set(2,0,-1);
+    S.set(0,1,-1);
+
+    Shape cur;
+    Shape next;
+    cur=S;
+    while(true){
+        board.clear(con);
+        board.draw(con);
+        cur.draw(con);
+
+        if(_kbhit()){
+            int ch;
+            if(getch()==224){
+                switch(ch=getch()){
+                case 72:
+                    rotate(board,cur);break;
+                case 75:move(board,cur,-1,0);break;
+                case 77:move(board,cur,1,0);break;
+                case 80:move(board,cur,0,1); break;
+
+
+                default:
+    cout<<        ch<<endl;
+                }
+            }
+        }
+        Sleep(100);
+    }
+
+    return 0;
+}

@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1476419937 source:d:\phuc\c-cpp\xephinh\main.cpp
+	<iostream>
+	"console.cpp"
+	"shape.h"
+	<windows.h>
+	<time.h>
+
+1476372362 d:\phuc\c-cpp\xephinh\console.h
+	<windows.h>
+	<conio.h>
+	<bits/stdc++.h>
+	<tchar.h>
+
+1476372350 d:\phuc\c-cpp\xephinh\console.cpp
+	"console.h"
+
+1476379841 d:\phuc\c-cpp\xephinh\shape.h
+	"console.h"
+
+1476366406 d:\phuc\c-cpp\xephinh\graphic.h
+	"console.h"
+	"shape.h"
+
+1476370311 d:\phuc\c-cpp\xephinh\graphic.cpp
+	"graphic.h"
+
