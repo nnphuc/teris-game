@@ -70,6 +70,7 @@ bool eat(Shape &board,Shape &s){
 
 int main()
 {
+    system("cls");
     Console con("xep hinh");
 
     con.setCursor(false);
@@ -111,6 +112,7 @@ int main()
     next.draw(con);
     con.setTextColor(con.BLACK);
     int level=0;
+
     while(true){
 
         if(tick%Draw==0){
